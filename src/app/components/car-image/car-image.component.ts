@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CarImage } from 'src/app/models/carImage';
+import { CarImageService } from 'src/app/services/car-image.service';
 
 @Component({
   selector: 'app-car-image',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarImageComponent implements OnInit {
 
-  constructor() { }
+  carImages :CarImage[] =[];
+  constructor(private carImageService:CarImageService) { }
 
   ngOnInit(): void {
+    this.getCarImages();
   }
 
+  getCategories(){
+    this.carImageService.getCarImages().subscribe(response=>{
+      this.carImages = response.data
+    }) 
+  }
 }
