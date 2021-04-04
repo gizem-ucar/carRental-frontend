@@ -5,12 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarComponent } from './components/car/car.component';
 import { NaviComponent } from './components/navi/navi.component';
+import { BrandComponent } from './brand/brand.component';
+import { ColorComponent } from './components/color/color.component';
+import { CarImageComponent } from './components/car-image/car-image.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { RentalComponent } from './components/rental/rental.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarComponent,
-    NaviComponent
+    NaviComponent,
+    BrandComponent,
+    ColorComponent,
+    CarImageComponent,
+    CustomerComponent,
+    RentalComponent
   ],
   imports: [
     BrowserModule,
