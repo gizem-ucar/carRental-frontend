@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CarDetail } from 'src/app/models/cardetail';
 import { Color } from 'src/app/models/color';
+import { CartService } from 'src/app/services/cart.service';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -11,8 +14,13 @@ export class ColorComponent implements OnInit {
 
   colors :Color[] =[];
   currentColor : Color;
+  nullColor:Color;
+  filterText="";
+  dataLoaded=false;
 
-  constructor(private colorService:ColorService) { }
+  constructor(private colorService:ColorService,
+    private cartService:CartService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.getColors();
@@ -41,4 +49,12 @@ export class ColorComponent implements OnInit {
       return "list-group-item"
     }
   }
+  resetCurrentBrand(){
+    this.currentColor=this.nullColor;
+  }
+  addToCart(color:CarDetail){
+    this.toastrService.success("Sepete Eklendi",color.colorName)
+    this.cartService.addToCart(color);
+  }
+
 }

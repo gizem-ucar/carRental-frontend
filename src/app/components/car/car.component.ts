@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/cardetail';
 import { CardetailService } from 'src/app/services/cardetail.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-car',
@@ -12,11 +14,13 @@ export class CarComponent implements OnInit {
   cars: CarDetail[] =[];
   currentCar:CarDetail;
   nullCar:CarDetail;
-  //filterText="";
+  filterText="";
   dataLoaded = false;
   
   constructor(private cardetailService:CardetailService,
               private activatedRoute:ActivatedRoute,
+              private toastrService:ToastrService,
+              private cartService:CartService
               ) {}
 
   ngOnInit(): void {
@@ -51,5 +55,9 @@ export class CarComponent implements OnInit {
 
   resetCurrentCar(){
     this.currentCar=this.nullCar;
+  }
+  addToCart(car:CarDetail){
+    this.toastrService.success("Sepete Eklendi",car.carName)
+    this.cartService.addToCart(car);
   }
 }

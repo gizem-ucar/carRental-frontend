@@ -1,8 +1,36 @@
-<ul class="list-group">
+<!-- <ul class="list-group">
     <li [class]="getAllColorClass()"
     routerLink= "/cars">Tüm Renkler</li>
     <li (click)="setCurrentColor(color)" 
     routerLink= "/cars/color/{{color.colorId}}"
     *ngFor="let color of colors" 
     [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
-</ul> 
+</ul>  -->
+<div class="mb-3">
+  <label for="filterText" class="form-label">Marka Ara</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz">
+</div>
+<div *ngIf="filterText" class="alert alert-success">
+  {{filterText}} aradınız.
+</div>
+<div class="mt-3">
+    <h6 class="text-primary">Renk</h6>
+    <select  class="form-select" [(ngModel)]="currentColor">
+      <option>Renk Seçiniz</option>
+      <option *ngFor="let color of colors" [ngValue]="color">
+        {{ color.colorName }}
+      </option>
+    </select>
+    <button
+    *ngIf="currentColor"
+      routerLink="/cars/{{ currentColor.colorId}}"
+      type="button"
+      class="btn btn-secondary mt-3"
+    >
+      Filtrele
+    </button>
+    <button routerLink="/cars" type="button" class="btn btn-secondary mt-3 ms-0">
+      Filtreyi Temizle
+    </button>
+  </div>
+  <h5 *ngIf="currentColor">{{currentColor.colorName}} seçtiniz</h5>
